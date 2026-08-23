@@ -8,12 +8,12 @@ function DoadorChatPage() {
  
 
   return (
-    <>
+    <section>
       <ChatContainer/>
         <ChatMessage/>
         <OngResultCard/>
       <ChatInput/>
-    </>
+    </section>
   )
 }
 
