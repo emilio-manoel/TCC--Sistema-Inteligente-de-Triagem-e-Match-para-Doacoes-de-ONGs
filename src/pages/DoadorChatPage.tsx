@@ -1,20 +1,29 @@
-import ChatInput from "../components/chat/ChatInput"
-import ChatMessage from "../components/chat/ChatMessage"
-import OngResultCard from "../components/chat/OngResultCard"
-import ChatContainer from "../components/chat/ChatContainer"
-
+import { useState } from "react";
+import ChatInput from "../components/chat/ChatInput";
+import ChatMessage, { type MessageItem } from "../components/chat/ChatMessage";
+import ChatContainer from "../components/chat/ChatContainer";
 
 function DoadorChatPage() {
- 
+  const [messages, setMessages] = useState<MessageItem[]>([])
+
+  const handleSendMessage = (text: string) => {
+    const userMsg: MessageItem = {
+      id: Date.now().toString(),
+      content: text,
+      sender: "user"
+    };
+    setMessages((prev) => [...prev, userMsg]);
+  };
 
   return (
-    <section>
-      <ChatContainer/>
-        <ChatMessage/>
-        <OngResultCard/>
-      <ChatInput/>
-    </section>
-  )
+    <div className="flex flex-1 flex-col h-full min-h-0 overflow-hidden">
+      <ChatContainer>
+        <ChatMessage messages={messages} />
+      </ChatContainer>
+      <ChatInput onSendMessage={handleSendMessage} />
+    </div>
+  );
 }
 
-export default DoadorChatPage
+export default DoadorChatPage;
+

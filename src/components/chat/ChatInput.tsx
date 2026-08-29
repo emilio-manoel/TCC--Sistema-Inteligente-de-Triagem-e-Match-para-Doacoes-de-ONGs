@@ -1,15 +1,44 @@
-import { Input } from "../ui/Input"
+import { Input } from "../ui/Input";
+import { useState, type KeyboardEvent } from "react";
 
-
-function ChatInput() {
- 
-
-  return (
-    <>
-    <Input placeholder="Digite o que deseja doar e onde mora..." suffix="Enviar" className="w-full fixed bottom-0 left-0 right-0 bg-white p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50"/>
-     
-    </>
-  )
+interface ChatInputProps {
+  onSendMessage?: (text: string) => void;
 }
 
-export default ChatInput
+function ChatInput({ onSendMessage }: ChatInputProps) {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSend = () => {
+    if (!inputValue.trim()) return;
+    if (onSendMessage) {
+      onSendMessage(inputValue.trim());
+    }
+    setInputValue("");
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  return (
+    <div className="p-4 bg-background border-t border-border shrink-0 w-full">
+      <div className="max-w-4xl mx-auto w-full">
+        <Input
+          placeholder="Digite o que deseja doar e onde mora..."
+          suffix="Enviar"
+          className="w-full"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onclickSuffix={handleSend}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default ChatInput;
+

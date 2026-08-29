@@ -27,7 +27,7 @@ function Header() {
           <Button
             variant="secondaryStrong"
             icon={TrendingUp}
-            onClick={() => void navigate('/')}
+            onClick={() => void window.location.reload() && navigate('/')}
           >
             <span className="hidden sm:inline">Nova pesquisa </span>
           </Button>
