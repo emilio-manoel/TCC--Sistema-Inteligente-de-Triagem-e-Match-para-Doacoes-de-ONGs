@@ -1,4 +1,4 @@
-import Messagem from "../ui/mensage";
+import Messagem from "../ui/Mensage";
 
 export interface MessageItem {
   id: string;
