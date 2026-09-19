@@ -3,13 +3,14 @@ import { useState, type KeyboardEvent } from "react";
 
 interface ChatInputProps {
   onSendMessage?: (text: string) => void;
+  disabled?: boolean;
 }
 
-function ChatInput({ onSendMessage }: ChatInputProps) {
+function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
   const [inputValue, setInputValue] = useState("");
 
   const handleSend = () => {
-    if (!inputValue.trim()) return;
+    if (disabled || !inputValue.trim()) return;
     if (onSendMessage) {
       onSendMessage(inputValue.trim());
     }
@@ -31,6 +32,7 @@ function ChatInput({ onSendMessage }: ChatInputProps) {
           suffix="Enviar"
           className="w-full"
           value={inputValue}
+          disabled={disabled}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
           onclickSuffix={handleSend}
