@@ -11,6 +11,7 @@ Informe o seu CEP ou cidade.
 
 💡 Você escolhe como navegar:
 Com item: "Moro no CEP 40020-000 e tenho 3 cobertores." (Busco a ONG exata para a sua doação).
+
 Apenas localização: "Moro no CEP 40020-000." (Te mostro a lista de tudo o que as ONGs da sua região estão precisando no momento).
 
 Qual é o seu CEP ou cidade para começarmos?`,

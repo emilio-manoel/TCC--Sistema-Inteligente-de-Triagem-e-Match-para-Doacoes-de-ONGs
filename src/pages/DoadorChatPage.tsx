@@ -3,7 +3,7 @@ import ChatInput from "../components/chat/ChatInput";
 import ChatMessage, { type MessageItem } from "../components/chat/ChatMessage";
 import ChatContainer from "../components/chat/ChatContainer";
 import { MsgInicial } from "../utils/mensagemInicial.ts";
-import { doadorMensagem } from "../http/api/requestHttp.ts";
+import { doadorMensagem } from "../api/requestHttp.ts";
 
 
 function DoadorChatPage() {
@@ -31,12 +31,10 @@ function DoadorChatPage() {
       const res = await doadorMensagem(apiMessages);
       console.log("Resposta da API:", res);
 
-      const botContent =
-        res.mensagem_chat || res.mensagem || res.resposta || "Não foi possível obter uma resposta.";
 
       const botMsg: MessageItem = {
         id: (Date.now() + 1).toString(),
-        content: botContent,
+        content: res.pergunta || res.respostaMatch.mensagem_chat,
         sender: "bot"
       };
 
