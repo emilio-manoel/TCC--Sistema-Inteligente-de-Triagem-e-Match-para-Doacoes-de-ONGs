@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
                 element: <DoadorChatPage/>,
             },
             {
+                path: '/:id',
+                element: <DoadorChatPage/>,
+            },
+            {
                 path: '/historico',
                 element: <History/>,
             },
