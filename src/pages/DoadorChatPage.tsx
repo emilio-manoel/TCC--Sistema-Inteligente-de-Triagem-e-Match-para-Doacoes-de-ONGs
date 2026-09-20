@@ -4,11 +4,13 @@ import ChatMessage, { type MessageItem } from "../components/chat/ChatMessage";
 import ChatContainer from "../components/chat/ChatContainer";
 import { MsgInicial } from "../utils/mensagemInicial.ts";
 import { doadorMensagem } from "../api/requestHttp.ts";
+import MapLeaflet from "../utils/leaflet.tsx";
 
 
 function DoadorChatPage() {
   const [messages, setMessages] = useState<MessageItem[]>([MsgInicial]);
   const [loading, setLoading] = useState(false);
+  const [mapData, setMapData] = useState<{ ongs: any[]; coordenadasUsuario: [number, number] } | null>(null);
 
   const handleSendMessage = async (text: string) => {
     const userMsg: MessageItem = {
@@ -29,8 +31,14 @@ function DoadorChatPage() {
       }));
 
       const res = await doadorMensagem(apiMessages);
-      console.log("Resposta da API:", res);
+      console.log(res)
 
+      if (res.respostaMatch && res.ongs && res.coordenadasUsuario) {
+        setMapData({
+          ongs: res.ongs,
+          coordenadasUsuario: [res.ongs[0].latitude, res.ongs[0].longitude]
+        });
+      }
 
       const botMsg: MessageItem = {
         id: (Date.now() + 1).toString(),
@@ -59,6 +67,12 @@ function DoadorChatPage() {
     <div className="flex flex-1 flex-col h-full min-h-0 overflow-hidden">
       <ChatContainer>
         <ChatMessage messages={messages} />
+        {mapData && (
+          <MapLeaflet
+            ongs={mapData.ongs}
+            coordenadasUsuario={mapData.coordenadasUsuario}
+          />
+        )}
       </ChatContainer>
       <ChatInput onSendMessage={handleSendMessage} disabled={!isLastMessageBot} />
     </div>
@@ -66,4 +80,5 @@ function DoadorChatPage() {
 }
 
 export default DoadorChatPage;
+
 
