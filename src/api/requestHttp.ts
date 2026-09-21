@@ -1,8 +1,16 @@
 import type {DadosONG} from "../types/ongCreate"
+import axios from 'axios';
 
 
-const API_BASE_URL =  import.meta.env.VITE_BACKEND_URL || "/api" 
+//
+const rawBaseUrl = import.meta.env.VITE_BACKEND_URL || "/api";
+export const API_BASE_URL = rawBaseUrl.replace(/\/$/, "");
 
+// Exemplo com Axios
+
+export const api = axios.create({
+  baseURL: API_BASE_URL,
+});
 
 interface Mensagem {
   role: "user" | "model";
