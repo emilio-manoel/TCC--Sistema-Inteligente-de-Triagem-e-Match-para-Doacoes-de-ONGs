@@ -8,6 +8,7 @@ import {
 } from "react";
 import { HeartPlus } from "lucide-react";
 import type { DadosONG, Necessidade } from "../types/ongCreate";
+import { createOng } from "../api/requestHttp";
 
 function CadastroOngPage() {
   const [tempArea, tempAreaSet] = useState("");
@@ -19,6 +20,13 @@ function CadastroOngPage() {
   const [tempUrgencia, tempUrgenciaSet] = useState<"baixa" | "media" | "alta">(
     "baixa",
   );
+  const [feedback, setFeedback] = useState<{
+    mensagem: string;
+    tipo: "info" | "erro" | null;
+  }>({
+    mensagem: "",
+    tipo: null,
+  });
 
   const [formData, setFormData] = useState<DadosONG>({
     cnpj: "",
@@ -26,7 +34,7 @@ function CadastroOngPage() {
     natureza_juridica: "",
     endereco_completo: "",
     cep: "",
-    cidade: "",
+    municipio: "",
     uf: "",
     descricao: "",
     areas_atuacao: [],
@@ -121,9 +129,32 @@ function CadastroOngPage() {
     }
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    console.log("Dados prontos para enviar à API:", formData);
+
+    const enderecoFormatado = `${formData.endereco_completo}, ${formData.municipio}, ${formData.uf}, ${formData.cep}`;
+    const dadosProntosParaEnvio = {
+      ...formData,
+      endereco_completo: enderecoFormatado.toUpperCase(),
+    };
+
+    try {
+      const resposta = await createOng(dadosProntosParaEnvio);
+
+      if (resposta?.message) {
+        setFeedback({
+          mensagem: resposta.message,
+          tipo: "info",
+        });
+      }
+    } catch (error: any) {
+      const mensagemErro =
+        error.response?.data?.message || "Ocorreu um erro ao cadastrar a ONG.";
+      setFeedback({
+        mensagem: mensagemErro,
+        tipo: "info",
+      });
+    }
   }
 
   return (
@@ -192,9 +223,9 @@ function CadastroOngPage() {
           <div>
             <label className="block text-sm font-medium mb-1">Cidade</label>
             <Input
-              name="cidade"
-              placeholder="Cidade"
-              value={formData.cidade}
+              name="municipio"
+              placeholder="Cidade / municipio"
+              value={formData.municipio}
               onChange={handleInputChange}
               required
             />
@@ -403,7 +434,6 @@ function CadastroOngPage() {
               onChange={(e) => tempDescricaoSet(e.target.value)}
             />
 
-          
             <div className="bg-input flex items-center rounded-2xl p-4 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]">
               <select
                 value={tempUrgencia}
@@ -425,7 +455,6 @@ function CadastroOngPage() {
             </div>
           </div>
 
-        
           <div className="flex justify-end">
             <Button
               type="button"
@@ -436,10 +465,8 @@ function CadastroOngPage() {
             </Button>
           </div>
 
-         
           <div className="flex flex-wrap gap-2 mt-2">
             {formData.necessidade?.map((nec, index) => {
-            
               if (!nec.item) return null;
 
               return (
@@ -447,7 +474,9 @@ function CadastroOngPage() {
                   key={index}
                   className="bg-secondary-button border border-border px-3 py-1 rounded-full text-xs flex items-center gap-2 shadow-sm"
                 >
-                  <strong className="text-foreground wrap-break-words">{nec.item}</strong>
+                  <strong className="text-foreground wrap-break-words">
+                    {nec.item}
+                  </strong>
                   {nec.categoria && (
                     <span className="text-muted-foreground">
                       ({nec.categoria})
@@ -476,6 +505,25 @@ function CadastroOngPage() {
             })}
           </div>
         </div>
+
+        {/* Renderização condicional do banner azul de aviso */}
+        {feedback.tipo === "info" && (
+          <div className="w-full bg-secondary-button border border-border text-foreground p-4 rounded-xl flex items-center justify-between text-sm font-medium animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="flex items-center gap-2">
+              <span className="text-base">ℹ️</span>
+              <span>{feedback.mensagem}</span>
+            </div>
+
+            
+            <button
+              type="button"
+              onClick={() => setFeedback({ mensagem: "", tipo: null })}
+              className="text-foreground"
+            >
+              ✕
+            </button>
+          </div>
+        )}
 
         <div className="flex justify-center w-full mt-4">
           <Button

@@ -8,17 +8,25 @@ export interface MessageItem {
 
 interface ChatMessageProps {
   messages?: MessageItem[];
+  children?: React.ReactNode;
 }
 
-function ChatMessage({ messages = [] }: ChatMessageProps) {
+function ChatMessage({ messages = [], children }: ChatMessageProps) {
+  const lastBotMessageId = [...messages]
+    .reverse()
+    .find((msg) => msg.sender === 'bot')?.id;
+
   return (
     <>
       {messages.map((msg) => (
-        <Messagem key={msg.id} content={msg.content} sender={msg.sender} />
+        <Messagem key={msg.id} content={msg.content} sender={msg.sender}>
+          {msg.id === lastBotMessageId ? children : null}
+        </Messagem>
       ))}
     </>
   );
 }
+
 
 export default ChatMessage;
 

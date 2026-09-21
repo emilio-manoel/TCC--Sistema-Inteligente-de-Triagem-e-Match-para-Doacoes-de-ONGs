@@ -4,14 +4,14 @@ export interface DadosONG {
   natureza_juridica: string;
   endereco_completo: string;
   cep: string;
-  cidade: string;
+  municipio: string;
   uf: string;
   descricao: string;
   areas_atuacao: string[];
-  subareas_atuacao?: string[];
-  numero_contato?: string[];
-  redes_sociais?: string[];
-  necessidade?: Necessidade[];
+  subareas_atuacao: string[];
+  numero_contato: string[];
+  redes_sociais: string[];
+  necessidade: Necessidade[];
 }
 
 export interface Necessidade {

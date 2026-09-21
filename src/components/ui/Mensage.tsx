@@ -3,9 +3,10 @@ import ReactMarkdown from 'react-markdown';
 interface MessagemProps {
   content: string;
   sender: 'user' | 'bot';
+  children?: React.ReactNode;
 }
 
-function Messagem({ content, sender }: MessagemProps) {
+function Messagem({ content, sender, children }: MessagemProps) {
   const isUser = sender === 'user';
 
   return (
@@ -30,6 +31,7 @@ function Messagem({ content, sender }: MessagemProps) {
             {content}
           </ReactMarkdown>
         )}
+        {children}
       </div>
     </div>
   );

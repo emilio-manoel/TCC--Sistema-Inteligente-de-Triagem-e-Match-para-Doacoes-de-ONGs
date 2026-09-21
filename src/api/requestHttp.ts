@@ -1,35 +1,13 @@
-const API_BASE_URL = '/api';
+import type {DadosONG} from "../types/ongCreate"
+
+
+const API_BASE_URL = "/api" || import.meta.env.VITE_BACKEND_URL 
+
 
 interface Mensagem {
   role: "user" | "model";
   texto: string;
 }
-
-interface ONG {
-  cnpj: string;
-  razao_social: string;
-  natureza_juridica: string;
-  situacao_cadastral: string;
-  endereco_completo: string;
-  municipio: string;
-  uf: string;
-  areas_atuacao: string[];
-  subareas_atuacao?: string[];
-  numero_contato?: string[];
-  redes_sociais?: string[];
-  localizacao: {
-    type: "Point";
-    coordinates: [number, number];
-  };
-  necessidades?: Necessidade[]
-}
-
-export interface Necessidade{
-  item: string;
-  categoria?: string;
-  urgencia: "baixa" | "media" | "alta";
-}
-
 
 export async function doadorMensagem(mensagem: Mensagem[]) {
   const response = await fetch(`${API_BASE_URL}/doador/nearby`, {
@@ -41,9 +19,9 @@ export async function doadorMensagem(mensagem: Mensagem[]) {
   return await response.json();
 }
 
-export async function createOng(dados: ONG[]) {
+export async function createOng(dados: DadosONG) {
 
-  const response = await fetch(`${API_BASE_URL}/doador/ong/`, {
+  const response = await fetch(`${API_BASE_URL}/ong/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dados)
