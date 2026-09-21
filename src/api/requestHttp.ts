@@ -1,15 +1,15 @@
-import type {DadosONG} from "../types/ongCreate"
+import type { DadosONG } from "../types/ongCreate";
 import axios from 'axios';
 
-
-//
+// Em dev local sem VITE_BACKEND_URL, assume "/api" e passa pelo proxy do Vite
 const rawBaseUrl = import.meta.env.VITE_BACKEND_URL || "/api";
-export const API_BASE_URL = rawBaseUrl.replace(/\/$/, "");
-
-// Exemplo com Axios
+export const API_BASE_URL = rawBaseUrl.replace(/\/+$/, "");
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 interface Mensagem {
@@ -18,22 +18,11 @@ interface Mensagem {
 }
 
 export async function doadorMensagem(mensagem: Mensagem[]) {
-  const response = await fetch(`${API_BASE_URL}/doador/nearby`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(mensagem)
-  });
-  
-  return await response.json();
+  const response = await api.post('/doador/nearby', mensagem);
+  return response.data;
 }
 
 export async function createOng(dados: DadosONG) {
-
-  const response = await fetch(`${API_BASE_URL}/ong/`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(dados)
-  });
-  
-  return await response.json();
+  const response = await api.post('/ong', dados);
+  return response.data;
 }
