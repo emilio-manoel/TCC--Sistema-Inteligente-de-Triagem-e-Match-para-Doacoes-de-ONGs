@@ -36,7 +36,6 @@ function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
           onClickSuffix={handleSend}
-          autoFocus
         />
       </div>
     </div>

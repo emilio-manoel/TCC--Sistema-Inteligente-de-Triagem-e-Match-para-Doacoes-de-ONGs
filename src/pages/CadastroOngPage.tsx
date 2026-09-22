@@ -189,7 +189,6 @@ function CadastroOngPage() {
               placeholder="00.000.000/0000-00"
               value={formData.cnpj}
               onChange={handleInputChange}
-              autoFocus
               required
             />
           </div>

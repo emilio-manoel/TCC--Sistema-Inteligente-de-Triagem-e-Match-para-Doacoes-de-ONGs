@@ -23,7 +23,7 @@ export default function MapLeaflet({
   coordenadasUsuario,
 }: MapLeafletProps) {
   return (
-    <div className="w-3/4 h-100 rounded-lg overflow-hidden shadow-lg border border-gray-200">
+    <div className="w-100 h-100 rounded-lg overflow-hidden shadow-lg border border-gray-200">
       <MapContainer
         center={coordenadasUsuario}
         zoom={13}

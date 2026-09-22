@@ -32,7 +32,7 @@ function DoadorChatPage() {
           <div className="flex items-center gap-2 p-3 my-2 max-w-[70%] w-fit rounded-lg bg-card text-foreground border border-border text-xs md:text-sm shadow-sm">
             <Bot className="w-4 h-4 text-primary shrink-0" />
             <span className="text-muted-foreground">O assistente está digitando</span>
-            <Loader2 className="w-3.5 h-3.5 animate-spin text-primary shrink-0" />
+            <Loader2 className="w-3.5 h-3.0 animate-spin text-primary shrink-0" />
           </div>
         )}
       </ChatContainer>
