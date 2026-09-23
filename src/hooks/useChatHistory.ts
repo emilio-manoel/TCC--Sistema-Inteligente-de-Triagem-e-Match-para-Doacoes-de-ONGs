@@ -168,12 +168,6 @@ export function useChatHistory() {
       setLoading(false);
     }
   };
-  
-const deleteCurrentChat = () => {
-  if (!currentChatId) return;
-  deleteChatSession(currentChatId);
-  navigate("/", { replace: true }); // Redireciona para um chat limpo
-}; 
 
   const isLastMessageBot =
     messages.length > 0 && messages[messages.length - 1].sender === "bot" && !loading;
@@ -184,7 +178,6 @@ const deleteCurrentChat = () => {
     mapData,
     sendMessage,
     createNewChat,
-    deleteCurrentChat,
     isLastMessageBot,
   };
 }
