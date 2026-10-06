@@ -1,3 +1,4 @@
+import type { DadosONG } from "../types/ongCreate";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 
@@ -14,7 +15,7 @@ L.Icon.Default.mergeOptions({
 });
 
 interface MapLeafletProps {
-  ongs: any[];
+  ongs: DadosONG[];
   coordenadasUsuario: [number, number];
 }
 
