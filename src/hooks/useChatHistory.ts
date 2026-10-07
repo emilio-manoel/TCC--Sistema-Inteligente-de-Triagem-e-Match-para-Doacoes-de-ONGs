@@ -131,8 +131,8 @@ export function useChatHistory() {
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
     setLoading(true);
+
     
-    const inicioEnvioMensagem = performance.now()
     
     try {
       const apiMessages = newMessages.slice(1).map((msg) => ({
@@ -141,10 +141,6 @@ export function useChatHistory() {
       }));
 
       const res = await doadorMensagem(apiMessages);
-
-      const fimRecebimentoMensagem = performance.now()
-
-console.log(`Tempo de envio e recebimento da mensagem: ${(fimRecebimentoMensagem - inicioEnvioMensagem)}ms`)
 
       if (res.respostaMatch && res.ongs && res.ongs.length > 0) {
         setMapData({
