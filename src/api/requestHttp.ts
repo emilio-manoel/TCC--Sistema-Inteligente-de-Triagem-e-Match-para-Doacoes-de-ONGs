@@ -1,11 +1,12 @@
 import type { DadosONG } from "../types/ongCreate";
 import axios from 'axios';
 
-// const rawBaseUrl = import.meta.env.VITE_BACKEND_URL || "/api";
-// export const API_BASE_URL = rawBaseUrl.replace(/\/+$/, "");
+// Em dev local sem VITE_BACKEND_URL, assume "/api" e passa pelo proxy do Vite
+const rawBaseUrl = import.meta.env.VITE_BACKEND_URL || "/api";
+export const API_BASE_URL = rawBaseUrl.replace(/\/+$/, "");
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
