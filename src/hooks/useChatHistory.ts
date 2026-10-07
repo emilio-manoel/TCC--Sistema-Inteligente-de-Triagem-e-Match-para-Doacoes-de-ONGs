@@ -122,17 +122,18 @@ export function useChatHistory() {
   const sendMessage = async (text: string) => {
     if (!text.trim() || loading) return;
 
-const inicioEnvioMensagem = performance.now()
     const userMsg: MessageItem = {
       id: Date.now().toString(),
       content: text,
       sender: "user",
     };
-
+    
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
     setLoading(true);
-
+    
+    const inicioEnvioMensagem = performance.now()
+    
     try {
       const apiMessages = newMessages.slice(1).map((msg) => ({
         role: msg.sender === "user" ? ("user" as const) : ("model" as const),
@@ -141,6 +142,10 @@ const inicioEnvioMensagem = performance.now()
 
       const res = await doadorMensagem(apiMessages);
 
+      const fimRecebimentoMensagem = performance.now()
+
+console.log(`Tempo de envio e recebimento da mensagem: ${(fimRecebimentoMensagem - inicioEnvioMensagem)}ms`)
+
       if (res.respostaMatch && res.ongs && res.ongs.length > 0) {
         setMapData({
           ongs: res.ongs,
@@ -148,9 +153,6 @@ const inicioEnvioMensagem = performance.now()
         });
       }
 
-            const fimRecebimentoMensagem = performance.now()
-
-      console.log(`Tempo de envio e recebimento da mensagem: ${(fimRecebimentoMensagem - inicioEnvioMensagem)}ms`)
 
       const botContent = res.pergunta || res.respostaMatch?.mensagem_chat || "Não foi possível obter uma resposta.";
 
