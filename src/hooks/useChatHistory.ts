@@ -122,6 +122,7 @@ export function useChatHistory() {
   const sendMessage = async (text: string) => {
     if (!text.trim() || loading) return;
 
+const inicioEnvioMensagem = performance.now()
     const userMsg: MessageItem = {
       id: Date.now().toString(),
       content: text,
@@ -146,6 +147,10 @@ export function useChatHistory() {
           coordenadasUsuario: [res.ongs[0].latitude, res.ongs[0].longitude],
         });
       }
+
+            const fimRecebimentoMensagem = performance.now()
+
+      console.log(`Tempo de envio e recebimento da mensagem: ${(fimRecebimentoMensagem - inicioEnvioMensagem)}ms`)
 
       const botContent = res.pergunta || res.respostaMatch?.mensagem_chat || "Não foi possível obter uma resposta.";
 
