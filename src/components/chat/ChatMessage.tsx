@@ -1,8 +1,10 @@
 import Message from "../ui/Message";
-import type { ChatMessageProps } from "../../types/messsage.";
+import type { ChatMessageProps } from "../../types/messsage";
 
-
-export default function ChatMessage({ messages = [], children }: ChatMessageProps) {
+export default function ChatMessage({
+  messages = [],
+  children,
+}: ChatMessageProps) {
   const lastBotMessageId = [...messages]
     .reverse()
     .find((msg) => msg.sender === "bot")?.id;

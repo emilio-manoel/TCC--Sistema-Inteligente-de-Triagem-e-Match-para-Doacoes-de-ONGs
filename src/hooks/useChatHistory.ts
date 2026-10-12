@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { type MessageItem } from "../types/messsage.";
+import { type MessageItem } from "../types/messsage";
 import { MsgInitial } from "../utils/messageInitial";
 import { doadorMensagem } from "../api/requestHttp";
 import type { DadosONG } from "../types/ongCreate";

@@ -1,13 +1,15 @@
 import ReactMarkdown from "react-markdown";
-import type { MessageProps } from "../../types/messsage.";
+import type { MessageProps } from "../../types/messsage";
 
 export default function Message({ content, sender, children }: MessageProps) {
   const isUser = sender === "user";
 
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"} w-full mb-2`}
+    <div
+      className={`flex ${isUser ? "justify-end" : "justify-start"} w-full mb-2`}
     >
-      <div className={`text-base md:text-sm max-w-[70%] ${
+      <div
+        className={`text-base md:text-sm max-w-[70%] ${
           isUser ? "bg-primary text-background" : "bg-card text-foreground"
         } p-3 rounded-lg wrap-break-word`}
       >

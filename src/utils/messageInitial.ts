@@ -1,4 +1,4 @@
-import type { MessageItem } from "../types/messsage."; 
+import type { MessageItem } from "../types/messsage";
 
 export const MsgInitial: MessageItem = {
   id: Date.now().toString(),
