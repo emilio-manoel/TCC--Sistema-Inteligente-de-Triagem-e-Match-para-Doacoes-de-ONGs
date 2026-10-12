@@ -14,6 +14,7 @@ export function Input({
   onClickSuffix,
   className,
   disabled,
+  type = "text",
   ...rest
 }: InputProps) {
   return (
@@ -25,10 +26,10 @@ export function Input({
       ].join(" ")}
     >
       <input
+        type={type}
+        disabled={disabled}
         {...rest}
         className="text-foreground placeholder:text-muted-foreground w-full bg-transparent text-sm outline-none disabled:cursor-not-allowed "
-        type="search"
-        disabled={disabled}
       />
       {suffix && (
         <>

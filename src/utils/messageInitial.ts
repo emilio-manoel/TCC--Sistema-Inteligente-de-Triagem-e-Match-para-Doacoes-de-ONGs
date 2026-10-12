@@ -1,6 +1,6 @@
-import type { MessageItem } from "../components/chat/ChatMessage";
+import type { MessageItem } from "../types/messsage."; 
 
-export const MsgInicial: MessageItem = {
+export const MsgInitial: MessageItem = {
   id: Date.now().toString(),
   content: `
 👋 Olá! Que bom ter você por aqui.

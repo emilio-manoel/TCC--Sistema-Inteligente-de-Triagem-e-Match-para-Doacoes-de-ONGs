@@ -1,6 +1,6 @@
 import { useEffect, useRef, type PropsWithChildren } from "react";
 
-function ChatContainer({ children }: PropsWithChildren) {
+export default function ChatContainer({ children }: PropsWithChildren) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,6 +22,3 @@ function ChatContainer({ children }: PropsWithChildren) {
     </div>
   );
 }
-
-export default ChatContainer;
-

@@ -10,7 +10,7 @@ import { HeartPlus } from "lucide-react";
 import type { DadosONG, Necessidade } from "../types/ongCreate";
 import { createOng } from "../api/requestHttp";
 
-function CadastroOngPage() {
+function RegisterOngPage() {
   const [tempArea, tempAreaSet] = useState("");
   const [tempSubArea, tempSubAreaSet] = useState("");
   const [tempContato, tempContatoSet] = useState("");
@@ -513,7 +513,6 @@ function CadastroOngPage() {
               <span>{feedback.mensagem}</span>
             </div>
 
-            
             <button
               type="button"
               onClick={() => setFeedback({ mensagem: "", tipo: null })}
@@ -539,4 +538,4 @@ function CadastroOngPage() {
   );
 }
 
-export default CadastroOngPage;
+export default RegisterOngPage;

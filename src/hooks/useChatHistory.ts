@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { type MessageItem } from "../components/chat/ChatMessage";
-import { MsgInicial } from "../utils/mensagemInicial";
+import { type MessageItem } from "../types/messsage.";
+import { MsgInitial } from "../utils/messageInitial";
 import { doadorMensagem } from "../api/requestHttp";
 import type { DadosONG } from "../types/ongCreate";
+
 
 export interface MapData {
   ongs: DadosONG[];
@@ -48,7 +49,7 @@ export function useChatHistory() {
   const navigate = useNavigate();
 
   const [currentChatId, setCurrentChatId] = useState<string>("");
-  const [messages, setMessages] = useState<MessageItem[]>([MsgInicial]);
+  const [messages, setMessages] = useState<MessageItem[]>([MsgInitial]);
   const [mapData, setMapData] = useState<MapData | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -66,14 +67,14 @@ export function useChatHistory() {
       } else {
         // Se acessou /:id e o ID não existe, inicia limpo
         setCurrentChatId(id);
-        setMessages([MsgInicial]);
+        setMessages([MsgInitial]);
         setMapData(null);
       }
     } else {
       // Se acessou '/', gera um novo ID único e redireciona para /:novoId
       const newId = Date.now().toString();
       setCurrentChatId(newId);
-      setMessages([MsgInicial]);
+      setMessages([MsgInitial]);
       setMapData(null);
       navigate(`/${newId}`, { replace: true });
     }
@@ -91,7 +92,8 @@ export function useChatHistory() {
     // Define o título da conversa com base na primeira mensagem do usuário
     const firstUserMsg = messages.find((m) => m.sender === "user");
     const titulo = firstUserMsg
-      ? firstUserMsg.content.slice(0, 30) + (firstUserMsg.content.length > 30 ? "..." : "")
+      ? firstUserMsg.content.slice(0, 30) +
+        (firstUserMsg.content.length > 30 ? "..." : "")
       : "Nova Conversa";
 
     const chatSession: ChatSession = {
@@ -127,17 +129,15 @@ export function useChatHistory() {
       content: text,
       sender: "user",
     };
-    
+
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
     setLoading(true);
 
-    
-    
     try {
       const apiMessages = newMessages.slice(1).map((msg) => ({
-        role: msg.sender === "user" ? ("user" as const) : ("model" as const),
-        texto: msg.content,
+        sender: msg.sender === "user" ? ("user" as const) : ("bot" as const),
+        content: msg.content,
       }));
 
       const res = await doadorMensagem(apiMessages);
@@ -149,8 +149,10 @@ export function useChatHistory() {
         });
       }
 
-
-      const botContent = res.pergunta || res.respostaMatch?.mensagem_chat || "Não foi possível obter uma resposta.";
+      const botContent =
+        res.pergunta ||
+        res.respostaMatch?.mensagem_chat ||
+        "Não foi possível obter uma resposta.";
 
       const botMsg: MessageItem = {
         id: (Date.now() + 1).toString(),
@@ -163,7 +165,8 @@ export function useChatHistory() {
       console.error("Erro ao enviar mensagem:", error);
       const errorMsg: MessageItem = {
         id: (Date.now() + 1).toString(),
-        content: "Ocorreu um erro ao conectar com o servidor. Tente novamente em instantes.",
+        content:
+          "Ocorreu um erro ao conectar com o servidor. Tente novamente em instantes.",
         sender: "bot",
       };
       setMessages((prev) => [...prev, errorMsg]);
@@ -173,7 +176,9 @@ export function useChatHistory() {
   };
 
   const isLastMessageBot =
-    messages.length > 0 && messages[messages.length - 1].sender === "bot" && !loading;
+    messages.length > 0 &&
+    messages[messages.length - 1].sender === "bot" &&
+    !loading;
 
   return {
     messages,

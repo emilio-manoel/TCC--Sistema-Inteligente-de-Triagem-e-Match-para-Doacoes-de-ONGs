@@ -4,10 +4,12 @@ import { ThemeContext, type Theme } from "./ThemeContext";
 
 export function ThemeProvider({children}: PropsWithChildren){
     const [theme, setTheme] = useState<Theme>(() => {
+
         const localStorageTheme = localStorage.getItem('theme') as Theme | null
         if(localStorageTheme) return localStorageTheme
 
         const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        
         return systemPrefersDark ? 'dark' : 'light';
     });
 
