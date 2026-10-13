@@ -1,4 +1,3 @@
-import type { DadosONG } from "../types/ongCreate";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 
@@ -6,6 +5,7 @@ import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import type { OngUpcoming } from "../types/apiResposte";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 });
 
 interface MapLeafletProps {
-  ongs: DadosONG[];
+  ongs: OngUpcoming[];
   coordenadasUsuario: [number, number];
 }
 
@@ -26,6 +26,7 @@ export default function MapLeaflet({
   return (
     <div className="w-100 h-100 rounded-lg overflow-hidden shadow-lg border border-gray-200">
       <MapContainer
+        key={coordenadasUsuario.join(",")}
         center={coordenadasUsuario}
         zoom={13}
         className="w-full h-full"
@@ -34,19 +35,23 @@ export default function MapLeaflet({
           attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {ongs.map((ong: any, index: number) => (
+        {ongs.map((ong: any) => (
           <Marker
-            key={index}
-            position={[ong.localizacao.coordinates[1], ong.localizacao.coordinates[0]]}
+            key={ong._id ?? ong.razao_social}
+            position={[ong.latitude, ong.longitude]}
           >
             <Popup>
               <div className="font-sans flex flex-col gap-1 min-w-45">
-                <span className="font-semibold text-sm">{ong.razao_social}</span>
+                <span className="font-semibold text-sm">
+                  {ong.razao_social}
+                </span>
                 {ong.endereco_completo && (
-                  <span className="text-xs text-gray-600">{ong.endereco_completo}</span>
+                  <span className="text-xs text-gray-600">
+                    {ong.endereco_completo}
+                  </span>
                 )}
                 <a
-                  href={`https://www.google.com/maps?q=${ong.localizacao.coordinates[1]},${ong.localizacao.coordinates[0]}`}
+                  href={`https://www.google.com/maps?q=${ong.latitude},${ong.longitude}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-blue-600 underline mt-1"

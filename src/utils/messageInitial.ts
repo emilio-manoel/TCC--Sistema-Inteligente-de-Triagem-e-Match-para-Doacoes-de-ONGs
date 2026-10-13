@@ -1,4 +1,4 @@
-import type { MessageItem } from "../types/messsage";
+import type { MessageItem } from "../types/chatAndMesssage";
 
 export const MsgInitial: MessageItem = {
   id: Date.now().toString(),

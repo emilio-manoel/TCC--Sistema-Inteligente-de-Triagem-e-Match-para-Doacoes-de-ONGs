@@ -1,6 +1,6 @@
 import type { DadosONG } from "../types/ongCreate";
 import axios from "axios";
-import type { MessageProps } from "../types/messsage";
+import type { MessageProps } from "../types/chatAndMesssage";
 
 // Em dev local sem VITE_BACKEND_URL, assume "/api" e passa pelo proxy do Vite
 const rawBaseUrl: string = import.meta.env.VITE_BACKEND_URL || "/api";
@@ -14,7 +14,7 @@ export const api = axios.create({
   },
 });
 
-export async function doadorMensagem(mensagem: MessageProps[]) {
+export async function donorMessage(mensagem: MessageProps[]) {
   const response = await api.post("/doador/nearby", mensagem);
   return response.data;
 }

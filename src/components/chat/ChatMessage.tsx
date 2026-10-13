@@ -1,5 +1,5 @@
 import Message from "../ui/Message";
-import type { ChatMessageProps } from "../../types/messsage";
+import type { ChatMessageProps } from "../../types/chatAndMesssage";
 
 export default function ChatMessage({
   messages = [],

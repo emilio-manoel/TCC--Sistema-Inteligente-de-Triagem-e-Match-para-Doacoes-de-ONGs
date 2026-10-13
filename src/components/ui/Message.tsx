@@ -1,5 +1,5 @@
 import ReactMarkdown from "react-markdown";
-import type { MessageProps } from "../../types/messsage";
+import type { MessageProps } from "../../types/chatAndMesssage";
 
 export default function Message({ content, sender, children }: MessageProps) {
   const isUser = sender === "user";

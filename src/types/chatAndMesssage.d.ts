@@ -12,3 +12,11 @@ export interface ChatMessageProps {
   messages?: MessageItem[];
   children?: React.ReactNode;
 }
+
+export interface ChatSession {
+  id: string;
+  titulo: string;
+  updatedAt: string;
+  messages: MessageItem[];
+  mapData: MapData | null;
+}

@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MessageSquare, Trash2 } from "lucide-react";
-import { getSavedChats, deleteChatSession, type ChatSession } from "../hooks/useChatHistory";
+import { getSavedChats, deleteChatSession } from "../hooks/useChatHistory";
+import type { ChatSession } from "../types/chatAndMesssage";
 
 export default function History() {
   const [chats, setChats] = useState<ChatSession[]>(() => getSavedChats());
 
   const handleDelete = (e: React.MouseEvent, id: string) => {
-    e.preventDefault(); 
+    e.preventDefault();
     e.stopPropagation();
 
     deleteChatSession(id);
@@ -19,7 +20,9 @@ export default function History() {
       <h1 className="text-xl font-bold mb-4">Histórico de Conversas</h1>
 
       {chats.length === 0 ? (
-        <p className="text-muted-foreground text-sm">Nenhuma conversa salva ainda.</p>
+        <p className="text-muted-foreground text-sm">
+          Nenhuma conversa salva ainda.
+        </p>
       ) : (
         /* Grid responsivo: 1 coluna no mobile, 2 em telas médias e 3 em telas grandes */
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">

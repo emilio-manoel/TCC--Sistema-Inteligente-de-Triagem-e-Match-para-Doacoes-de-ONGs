@@ -1,4 +1,4 @@
-import { Loader2, Bot } from "lucide-react"; // 1. Importação dos ícones do Lucide
+import { Loader2, Bot } from "lucide-react";
 import ChatInput from "../components/chat/ChatInput.tsx";
 import ChatMessage from "../components/chat/ChatMessage.tsx";
 import ChatContainer from "../components/chat/ChatContainer.tsx";

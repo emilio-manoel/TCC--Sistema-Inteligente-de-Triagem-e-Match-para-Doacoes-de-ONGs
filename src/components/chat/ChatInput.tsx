@@ -6,23 +6,23 @@ interface ChatInputProps {
   disabled?: boolean;
 }
 
-function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
+export default function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
   const [inputValue, setInputValue] = useState("");
 
-  const handleSend = () => {
+  function handleSend() {
     if (disabled || !inputValue.trim()) return;
     if (onSendMessage) {
       onSendMessage(inputValue.trim());
     }
     setInputValue("");
-  };
+  }
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       e.preventDefault();
       handleSend();
     }
-  };
+  }
 
   return (
     <div className="p-4 bg-background border-t border-border shrink-0 w-full">
@@ -41,6 +41,3 @@ function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
     </div>
   );
 }
-
-export default ChatInput;
-
