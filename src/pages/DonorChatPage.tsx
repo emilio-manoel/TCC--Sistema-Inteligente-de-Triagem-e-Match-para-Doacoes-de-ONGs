@@ -5,7 +5,7 @@ import ChatContainer from "../components/chat/ChatContainer.tsx";
 import MapLeaflet from "../utils/leaflet.tsx";
 import { useChatHistory } from "../hooks/useChatHistory.ts";
 
-function DonorChatPage() {
+export default function DonorChatPage() {
   const { messages, loading, mapData, sendMessage, isLastMessageBot } =
     useChatHistory();
 
@@ -39,5 +39,3 @@ function DonorChatPage() {
     </div>
   );
 }
-
-export default DonorChatPage;
