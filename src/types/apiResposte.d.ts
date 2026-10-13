@@ -1,10 +1,15 @@
-interface RespostaMatch {
-  sucesso: boolean;
-  mensagem_chat: string;
-  ong_selecionada: OngSelecionada | null;
+interface ResponseMatch {
+  success: boolean;
+  messageChat: string;
+  ongSelected: ongSelected | null;
 }
 
-interface OngSelecionada {
+interface Coordenadas {
+  lat: number;
+  lng: number;
+}
+
+interface ongSelected {
   id: string;
   nome: string;
   endereco_completo: string;
@@ -18,18 +23,18 @@ export interface OngUpcoming {
   longitude: number;
 }
 
-interface donorMessageIncompleto {
+interface DonorMessageIncompleto {
   status: "incompleto";
-  pergunta: string;
+  question: string;
 }
 
-interface donorMessageCompleto {
+interface DonorMessageCompleto {
   status: "completo";
   coordenadasUsuario: Coordenadas;
-  respostaMatch: RespostaMatch;
+  responseMatch: ResponseMatch;
   ongs: OngUpcoming[];
 }
 
 export type donorMessageResponse =
-  | donorMessageCompleto
-  | donorMessageIncompleto;
+  | DonorMessageCompleto
+  | DonorMessageIncompleto;

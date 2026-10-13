@@ -126,16 +126,16 @@ export function useChatHistory() {
       const res: donorMessageResponse = await donorMessage(apiMessages);
 
       if (res.status === "completo") {
-        if (res.respostaMatch && res.ongs && res.ongs.length > 0) {
+        if (res.responseMatch && res.ongs && res.ongs.length > 0) {
           setMapData({
             ongs: res.ongs,
-            coordenadasUsuario: [res.ongs[0].latitude, res.ongs[0].longitude],
+            coordenadasUsuario: [res.coordenadasUsuario.lat, res.coordenadasUsuario.lng],
           });
         }
       }
       const botContent =
-        (res.status === "incompleto" && res.pergunta) ||
-        (res.status === "completo" && res.respostaMatch.mensagem_chat) ||
+        (res.status === "incompleto" && res.question) ||
+        (res.status === "completo" && res.responseMatch.messageChat) ||
         "Não foi possível obter uma resposta.";
 
       const botMsg: MessageItem = {
