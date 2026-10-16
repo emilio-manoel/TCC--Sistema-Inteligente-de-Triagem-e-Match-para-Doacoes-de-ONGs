@@ -24,7 +24,6 @@ export default function History() {
           Nenhuma conversa salva ainda.
         </p>
       ) : (
-        /* Grid responsivo: 1 coluna no mobile, 2 em telas médias e 3 em telas grandes */
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {chats.map((chat) => (
             <Link
@@ -35,7 +34,7 @@ export default function History() {
               <div className="flex items-start gap-3 overflow-hidden mr-2 min-w-0">
                 <MessageSquare className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <div className="overflow-hidden min-w-0">
-                  <p className="font-medium text-sm truncate">{chat.titulo}</p>
+                  <p className="font-medium text-sm truncate">{chat.title}</p>
                   <span className="text-xs text-muted-foreground">
                     {new Date(chat.updatedAt).toLocaleDateString("pt-BR", {
                       day: "2-digit",

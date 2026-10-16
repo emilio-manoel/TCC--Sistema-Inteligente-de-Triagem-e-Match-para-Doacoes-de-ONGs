@@ -4,7 +4,7 @@ export interface MessageItem {
   sender: "user" | "bot";
 }
 
-export interface MessageProps extends Omit<MessageItem, 'id'> {
+export interface MessageProps extends Omit<MessageItem, "id"> {
   children?: React.ReactNode;
 }
 
@@ -15,7 +15,7 @@ export interface ChatMessageProps {
 
 export interface ChatSession {
   id: string;
-  titulo: string;
+  title: string;
   updatedAt: string;
   messages: MessageItem[];
   mapData: MapData | null;

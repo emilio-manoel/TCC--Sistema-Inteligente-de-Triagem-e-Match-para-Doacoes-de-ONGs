@@ -4,12 +4,8 @@ import type { MessageItem } from "../types/chatAndMesssage";
 import { MsgInitial } from "../utils/messageInitial";
 import { donorMessage } from "../api/requestHttp";
 import type { ChatSession } from "../types/chatAndMesssage";
-import type { donorMessageResponse, OngUpcoming } from "../types/apiResposte";
+import type { donorMessageResponse, MapData } from "../types/apiResposte";
 
-export interface MapData {
-  ongs: OngUpcoming[];
-  coordenadasUsuario: [number, number];
-}
 
 const STORAGE_KEY = "@tcc-ong:all-chats";
 
@@ -76,14 +72,14 @@ export function useChatHistory() {
 
     const allChats = getSavedChats();
     const firstUserMsg = messages.find((m) => m.sender === "user");
-    const titulo = firstUserMsg ? 
-        firstUserMsg.content.slice(0, 30) +
-        (firstUserMsg.content.length > 30 ? "..." :  "") 
-    : "Nova Conversa";
+    const title = firstUserMsg
+      ? firstUserMsg.content.slice(0, 30) +
+        (firstUserMsg.content.length > 30 ? "..." : "")
+      : "Nova Conversa";
 
     const chatSession: ChatSession = {
       id: currentChatId,
-      titulo,
+      title,
       updatedAt: new Date().toISOString(),
       messages,
       mapData,
@@ -129,7 +125,10 @@ export function useChatHistory() {
         if (res.responseMatch && res.ongs && res.ongs.length > 0) {
           setMapData({
             ongs: res.ongs,
-            coordenadasUsuario: [res.coordenadasUsuario.lat, res.coordenadasUsuario.lng],
+            coordenadasUsuario: [
+              res.coordenadasUsuario.lat,
+              res.coordenadasUsuario.lng,
+            ],
           });
         }
       }

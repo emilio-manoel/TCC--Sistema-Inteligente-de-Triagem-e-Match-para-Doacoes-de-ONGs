@@ -38,3 +38,8 @@ interface DonorMessageCompleto {
 export type donorMessageResponse =
   | DonorMessageCompleto
   | DonorMessageIncompleto;
+
+  export interface MapData {
+  ongs: OngUpcoming[];
+  coordenadasUsuario: [number, number];
+}

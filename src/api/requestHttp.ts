@@ -14,8 +14,8 @@ export const api = axios.create({
   },
 });
 
-export async function donorMessage(mensagem: MessageProps[]) {
-  const response = await api.post("/doador/nearby", mensagem);
+export async function donorMessage(message: MessageProps[]) {
+  const response = await api.post("/doador/nearby", message);
   return response.data;
 }
 

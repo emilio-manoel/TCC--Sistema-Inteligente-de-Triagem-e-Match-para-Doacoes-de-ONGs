@@ -5,7 +5,7 @@ import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import type { OngUpcoming } from "../types/apiResposte";
+import type { MapData, OngUpcoming } from "../types/apiResposte";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -14,15 +14,10 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-interface MapLeafletProps {
-  ongs: OngUpcoming[];
-  coordenadasUsuario: [number, number];
-}
-
 export default function MapLeaflet({
   ongs,
   coordenadasUsuario,
-}: MapLeafletProps) {
+}: MapData) {
   return (
     <div className="w-100 h-100 rounded-lg overflow-hidden shadow-lg border border-gray-200">
       <MapContainer
@@ -35,7 +30,7 @@ export default function MapLeaflet({
           attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {ongs.map((ong: any) => (
+        {ongs.map((ong:OngUpcoming ) => (
           <Marker
             key={ong._id ?? ong.razao_social}
             position={[ong.latitude, ong.longitude]}
