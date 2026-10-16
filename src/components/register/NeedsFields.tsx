@@ -5,14 +5,14 @@ import type { Necessidade } from "../../types/ongCreate";
 
 interface NeedsFieldsProps {
   necessidades?: Necessidade[];
-  onAddNecessidade: (newNeed: Necessidade) => void;
-  onRemoveNecessidade: (index: number) => void;
+  onAddNecessity: (newNeed: Necessidade) => void;
+  onRemoveNecessity: (index: number) => void;
 }
 
 export default function NeedsFields({
   necessidades,
-  onAddNecessidade,
-  onRemoveNecessidade,
+  onAddNecessity,
+  onRemoveNecessity,
 }: NeedsFieldsProps) {
   const [tempItem, tempItemSet] = useState("");
   const [tempDescricao, tempDescricaoSet] = useState("");
@@ -32,7 +32,7 @@ export default function NeedsFields({
       urgencia: tempUrgencia,
     };
 
-    onAddNecessidade(newNeed);
+    onAddNecessity(newNeed);
 
     tempItemSet("");
     tempDescricaoSet("");
@@ -112,7 +112,7 @@ export default function NeedsFields({
               <button
                 type="button"
                 className="ml-1 font-bold text-red-500 hover:text-red-700 transition-colors"
-                onClick={() => onRemoveNecessidade(index)}
+                onClick={() => onRemoveNecessity(index)}
               >
                 X
               </button>

@@ -1,11 +1,12 @@
 import {
   useState,
   type ChangeEvent,
-  type FormEvent,
+  type SubmitEvent,
   type KeyboardEvent,
 } from "react";
 import type { DadosONG, Necessidade } from "../types/ongCreate";
 import { createOng } from "../api/requestHttp";
+import type { FeedbackState } from "../types/ongCreate";
 
 const initialFormData: DadosONG = {
   cnpj: "",
@@ -32,10 +33,7 @@ const initialFormData: DadosONG = {
 export function useRegisterOng() {
   const [formData, setFormData] = useState<DadosONG>(initialFormData);
   const [loading, setLoading] = useState(false);
-  const [feedback, setFeedback] = useState<{
-    message: string;
-    type: "info" | "erro" | null;
-  }>({
+  const [feedback, setFeedback] = useState<FeedbackState>({
     message: "",
     type: null,
   });
@@ -99,18 +97,19 @@ export function useRegisterOng() {
     }
   }
 
-  async function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const enderecoFormatado = `${formData.endereco_completo}, ${formData.municipio}, ${formData.uf}, ${formData.cep}`;
+    const formattedAddress = `${formData.endereco_completo}, ${formData.municipio}, ${formData.uf}, ${formData.cep}`;
+
     const dataReadyToSend = {
       ...formData,
-      endereco_completo: enderecoFormatado.toUpperCase(),
+      endereco_completo: formattedAddress.toUpperCase(),
     };
 
     setLoading(true);
     try {
-      const response = await createOng(dataReadyToSend);
+      const response:FeedbackState = await createOng(dataReadyToSend);
 
       if (response?.message) {
         setFeedback({
@@ -119,12 +118,15 @@ export function useRegisterOng() {
         });
       }
     } catch (error: any) {
+
       const messageErro =
         error.response?.data?.message || "Ocorreu um erro ao cadastrar a ONG.";
+
       setFeedback({
         message: messageErro,
         type: "info",
       });
+      
     } finally {
       setLoading(false);
     }

@@ -25,7 +25,7 @@ export default function RegisterOngPage() {
       <div className="flex flex-col items-center text-center m-2 max-w-2xl mx-auto px-4">
         <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium mb-3 leading-relaxed">
           <span className="text-muted-foreground">
-            bem-vindo ao area de cadastro de ONGs{" "}
+            bem-vindo ao area de cadastro de ONGs:{" "}
           </span>
           <span className="font-extrabold block sm:inline mt-1 sm:mt-0">
             adicione aqui os dados para avaliação e divulgação das ong que
@@ -34,7 +34,7 @@ export default function RegisterOngPage() {
         </p>
         <p className="text-[10px] sm:text-xs">
           <span className="inline-block bg-secondary-button border border-border rounded-3xl font-medium px-3 py-1.5 shadow-sm">
-            Os dados devem ser enviadas por uma ong já autorizada
+            Os dados devem ser enviadas por uma ong com um registro legal (CNPJ)
           </span>
         </p>
       </div>
@@ -55,8 +55,8 @@ export default function RegisterOngPage() {
 
         <NeedsFields
           necessidades={formData.necessidade}
-          onAddNecessidade={handleAddNecessity}
-          onRemoveNecessidade={handleRemoveNecessity}
+          onAddNecessity={handleAddNecessity}
+          onRemoveNecessity={handleRemoveNecessity}
         />
 
         {feedback.type === "info" && (
@@ -84,7 +84,7 @@ export default function RegisterOngPage() {
             disabled={loading}
             className="w-full sm:max-w-xs text-base py-4 shadow-lg"
           >
-            {loading ? "Cadastrando..." : "Cadastrar ONG"}
+            {loading ? "Enviando para avaliar..." : "Enviar a ONG para avalição"}
           </Button>
         </div>
       </form>

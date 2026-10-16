@@ -19,3 +19,8 @@ export interface Necessidade {
   categoria?: string;
   urgencia: "baixa" | "media" | "alta";
 }
+
+export interface FeedbackState {
+  message: string;
+  type: "info" | "error" | null;
+}
