@@ -14,15 +14,12 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-export default function MapLeaflet({
-  ongs,
-  coordenadasUsuario,
-}: MapData) {
+export default function MapLeaflet({ ongs, userCoordinates }: MapData) {
   return (
     <div className="w-100 h-100 rounded-lg overflow-hidden shadow-lg border border-gray-200">
       <MapContainer
-        key={coordenadasUsuario.join(",")}
-        center={coordenadasUsuario}
+        key={userCoordinates.join(",")}
+        center={userCoordinates}
         zoom={13}
         className="w-full h-full"
       >
@@ -30,7 +27,7 @@ export default function MapLeaflet({
           attribution='&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {ongs.map((ong:OngUpcoming ) => (
+        {ongs.map((ong: OngUpcoming) => (
           <Marker
             key={ong._id ?? ong.razao_social}
             position={[ong.latitude, ong.longitude]}

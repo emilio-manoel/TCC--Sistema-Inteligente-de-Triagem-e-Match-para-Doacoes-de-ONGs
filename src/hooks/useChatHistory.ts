@@ -125,9 +125,9 @@ export function useChatHistory() {
         if (res.responseMatch && res.ongs && res.ongs.length > 0) {
           setMapData({
             ongs: res.ongs,
-            coordenadasUsuario: [
-              res.coordenadasUsuario.lat,
-              res.coordenadasUsuario.lng,
+            userCoordinates: [
+              res.userCoordinates.lat,
+              res.userCoordinates.lng,
             ],
           });
         }

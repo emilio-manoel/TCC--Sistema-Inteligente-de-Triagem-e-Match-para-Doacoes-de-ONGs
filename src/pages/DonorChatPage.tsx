@@ -16,7 +16,7 @@ export default function DonorChatPage() {
           {mapData && (
             <MapLeaflet
               ongs={mapData.ongs}
-              coordenadasUsuario={mapData.coordenadasUsuario}
+              userCoordinates={mapData.userCoordinates}
             />
           )}
         </ChatMessage>

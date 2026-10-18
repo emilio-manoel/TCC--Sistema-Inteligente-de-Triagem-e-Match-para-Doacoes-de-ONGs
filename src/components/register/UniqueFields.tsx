@@ -48,7 +48,7 @@ export default function UniqueFields({ formData, onChange }: UniqueFieldsProps) 
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Cidade</label>
+        <label className="block text-sm font-medium mb-1">Cidade / municipio </label>
         <Input
           name="municipio"
           placeholder="Cidade / municipio"

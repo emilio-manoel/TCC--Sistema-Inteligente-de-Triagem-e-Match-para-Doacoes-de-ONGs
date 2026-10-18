@@ -30,7 +30,7 @@ interface DonorMessageIncompleto {
 
 interface DonorMessageCompleto {
   status: "completo";
-  coordenadasUsuario: Coordenadas;
+  userCoordinates: Coordenadas;
   responseMatch: ResponseMatch;
   ongs: OngUpcoming[];
 }
@@ -39,7 +39,7 @@ export type donorMessageResponse =
   | DonorMessageCompleto
   | DonorMessageIncompleto;
 
-  export interface MapData {
+export interface MapData {
   ongs: OngUpcoming[];
-  coordenadasUsuario: [number, number];
+  userCoordinates: [number, number];
 }
