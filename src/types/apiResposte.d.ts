@@ -1,18 +1,11 @@
 interface ResponseMatch {
   success: boolean;
   messageChat: string;
-  ongSelected: ongSelected | null;
 }
 
 interface Coordenadas {
   lat: number;
   lng: number;
-}
-
-interface ongSelected {
-  id: string;
-  nome: string;
-  endereco_completo: string;
 }
 
 export interface OngUpcoming {
