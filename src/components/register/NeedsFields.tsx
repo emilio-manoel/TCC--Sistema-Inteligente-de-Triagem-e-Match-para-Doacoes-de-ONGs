@@ -56,13 +56,13 @@ export default function NeedsFields({
           onChange={(e) => tempDescricaoSet(e.target.value)}
         />
 
-        <div className="bg-input flex items-center rounded-2xl p-4 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]">
+        <div className="bg-input flex items-center rounded-2xl p-3 sm:p-4 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]">
           <select
             value={tempUrgencia}
             onChange={(e) =>
               tempUrgenciaSet(e.target.value as "baixa" | "media" | "alta")
             }
-            className="w-full bg-transparent text-sm outline-none text-foreground"
+            className="w-full bg-transparent text-base sm:text-sm outline-none text-foreground"
           >
             <option value="baixa" className="text-black">
               Urgência: Baixa
@@ -92,7 +92,7 @@ export default function NeedsFields({
               key={index}
               className="bg-secondary-button border border-border px-3 py-1 rounded-full text-xs flex items-center gap-2 shadow-sm"
             >
-              <strong className="text-foreground wrap-break-words">
+              <strong className="text-foreground wrap-break-word">
                 {nec.item}
               </strong>
               {nec.categoria && (

@@ -9,9 +9,9 @@ export default function Message({ content, sender, children }: MessageProps) {
       className={`flex ${isUser ? "justify-end" : "justify-start"} w-full mb-2`}
     >
       <div
-        className={`text-base md:text-sm max-w-[70%] ${
+        className={`text-base sm:text-sm max-w-[88%] sm:max-w-[75%] ${
           isUser ? "bg-primary text-background" : "bg-card text-foreground"
-        } p-3 rounded-lg wrap-break-word`}
+        } p-3 sm:p-4 rounded-2xl wrap-break-word shadow-sm`}
       >
         {isUser ? (
           <span className="whitespace-pre-line">{content}</span>

@@ -15,12 +15,13 @@ export function Input({
   className,
   disabled,
   type = "text",
+  autoComplete = "off",
   ...rest
 }: InputProps) {
   return (
     <div
       className={[
-        "bg-input flex items-center rounded-2xl p-4 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]",
+        "bg-input flex items-center rounded-2xl p-3 sm:p-4 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]",
         disabled ? "opacity-60" : "",
         className,
       ].join(" ")}
@@ -28,8 +29,12 @@ export function Input({
       <input
         type={type}
         disabled={disabled}
+        autoComplete={autoComplete}
+        data-1p-ignore="true"
+        data-lpignore="true"
+        data-form-type="other"
         {...rest}
-        className="text-foreground placeholder:text-muted-foreground w-full bg-transparent text-sm outline-none disabled:cursor-not-allowed "
+        className="text-foreground placeholder:text-muted-foreground w-full bg-transparent text-base sm:text-sm outline-none disabled:cursor-not-allowed"
       />
       {suffix && (
         <>

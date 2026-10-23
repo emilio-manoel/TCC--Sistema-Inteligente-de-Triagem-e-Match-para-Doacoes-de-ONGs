@@ -16,7 +16,7 @@ export default function History() {
   };
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <div className="flex-1 w-full h-full overflow-y-auto p-4 sm:p-6 max-w-5xl mx-auto">
       <h1 className="text-xl font-bold mb-4">Histórico de Conversas</h1>
 
       {chats.length === 0 ? (

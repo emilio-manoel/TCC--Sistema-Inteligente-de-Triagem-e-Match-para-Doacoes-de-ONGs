@@ -16,7 +16,7 @@ L.Icon.Default.mergeOptions({
 
 export default function MapLeaflet({ ongs, userCoordinates }: MapData) {
   return (
-    <div className="w-100 h-100 rounded-lg overflow-hidden shadow-lg border border-gray-200">
+    <div className="w-full max-w-full sm:max-w-md h-64 sm:h-80 rounded-xl overflow-hidden shadow-md border border-border mt-3">
       <MapContainer
         key={userCoordinates.join(",")}
         center={userCoordinates}

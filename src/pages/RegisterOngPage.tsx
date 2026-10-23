@@ -21,7 +21,7 @@ export default function RegisterOngPage() {
   } = useRegisterOng();
 
   return (
-    <div className="overflow-auto pb-12">
+    <div className="flex-1 w-full overflow-y-auto pb-12">
       <div className="flex flex-col items-center text-center m-2 max-w-2xl mx-auto px-4">
         <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium mb-3 leading-relaxed">
           <span className="text-muted-foreground">
@@ -42,7 +42,8 @@ export default function RegisterOngPage() {
       <form
         onSubmit={handleSubmit}
         onKeyDown={handleKeyDown}
-        className="flex flex-col gap-4 px-6"
+        autoComplete="off"
+        className="flex flex-col gap-4 px-4 sm:px-6 max-w-5xl mx-auto w-full"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <UniqueFields formData={formData} onChange={handleInputChange} />
