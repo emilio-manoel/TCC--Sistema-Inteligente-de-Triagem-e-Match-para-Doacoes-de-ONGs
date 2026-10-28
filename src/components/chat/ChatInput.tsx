@@ -25,7 +25,7 @@ export default function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
   }
 
   return (
-    <div className="p-4 bg-background border-t border-border shrink-0 w-full">
+    <div className="p-3 sm:p-4 safe-area-bottom bg-background border-t border-border shrink-0 w-full z-10">
       <div className="max-w-4xl mx-auto w-full">
         <Input
           placeholder="Digite o que deseja doar e onde mora..."

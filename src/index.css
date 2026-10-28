@@ -8,9 +8,13 @@
 @import "leaflet/dist/leaflet.css";
 
 @layer base {
-  html, body {
+  html,
+  body,
+  #root {
     width: 100%;
     height: 100%;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   body {
@@ -19,6 +23,16 @@
     transition:
       background-color 0.3s ease,
       color 0.3s ease;
+  }
+}
+
+.safe-area-bottom {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 640px) {
+  .safe-area-bottom {
+    padding-bottom: 1rem;
   }
 }
 

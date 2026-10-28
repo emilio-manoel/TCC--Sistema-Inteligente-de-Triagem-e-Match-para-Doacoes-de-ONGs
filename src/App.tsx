@@ -3,9 +3,9 @@ import { router } from "./router";
 
 function App() {
   return (
-    <main className="w-screen h-screen">
-    <RouterProvider router={router} /> 
-    </main>
+    <div className="w-full h-full">
+      <RouterProvider router={router} /> 
+    </div>
   )
 }
 

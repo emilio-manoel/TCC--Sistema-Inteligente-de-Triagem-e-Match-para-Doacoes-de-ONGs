@@ -21,7 +21,7 @@ export function Input({
   return (
     <div
       className={[
-        "bg-input flex items-center rounded-2xl p-3 sm:p-4 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]",
+        "bg-input flex items-center rounded-2xl p-2.5 sm:p-4 shadow-[4px_4px_18px_0px_rgba(0,0,0,0.2)]",
         disabled ? "opacity-60" : "",
         className,
       ].join(" ")}
@@ -34,16 +34,17 @@ export function Input({
         data-lpignore="true"
         data-form-type="other"
         {...rest}
-        className="text-foreground placeholder:text-muted-foreground w-full bg-transparent text-base sm:text-sm outline-none disabled:cursor-not-allowed"
+        className="text-foreground placeholder:text-muted-foreground w-full min-w-0 bg-transparent text-base sm:text-sm outline-none disabled:cursor-not-allowed"
       />
       {suffix && (
         <>
-          <Divider orientation="vertical" />
+          <Divider orientation="vertical" spacing={8} />
           <Button
             type="button"
             disabled={disabled}
             onClick={onClickSuffix}
-            className="text-muted-foreground text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed"
+            size="sm"
+            className="text-muted-foreground text-xs sm:text-sm font-medium disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
           >
             {suffix}
           </Button>
